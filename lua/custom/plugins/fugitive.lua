@@ -2,7 +2,7 @@ return {
   'tpope/vim-fugitive',
   event = 'BufWinEnter',
   config = function()
-    vim.keymap.set('n', '<leader>g', ':G', { desc = '[G]it' })
+    vim.keymap.set('n', '<leader>g<space>', ':G ', { desc = '[G]it' })
     vim.keymap.set('n', '<leader>gs', ':G<CR>', { desc = '[G]it [S]tatus' })
     vim.keymap.set('n', '<leader>gb', ':Git blame<CR>', { desc = '[G]it [B]lame' })
     vim.keymap.set('n', '<leader>ge', ':Gedit ', { desc = '[G]it [E]dit' })

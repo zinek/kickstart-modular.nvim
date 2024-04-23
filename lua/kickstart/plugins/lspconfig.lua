@@ -168,6 +168,13 @@ return {
             },
           },
         },
+        csharp_ls = {
+          root_dir = require('lspconfig').util.root_pattern('*.WebAPI.sln', 'Master.sln', '.git'),
+          -- handlers = {
+          --     ["textDocument/definition"] = require('csharpls_extended').handler,
+          -- },
+          autostart = false,
+        },
       }
 
       -- Ensure the servers and tools above are installed

@@ -9,16 +9,16 @@ return {
   init = function()
     local trouble = require 'trouble'
 
-    vim.keymap.set('n', '[T', function()
+    vim.keymap.set('n', '[X', function()
       trouble.first { skip_groups = true, jump = true }
     end, {})
-    vim.keymap.set('n', '[t', function()
+    vim.keymap.set('n', '[x', function()
       trouble.previous { skip_groups = true, jump = true }
     end, {})
-    vim.keymap.set('n', ']t', function()
+    vim.keymap.set('n', ']x', function()
       trouble.next { skip_groups = true, jump = true }
     end, {})
-    vim.keymap.set('n', ']T', function()
+    vim.keymap.set('n', ']X', function()
       trouble.last { skip_groups = true, jump = true }
     end, {})
 

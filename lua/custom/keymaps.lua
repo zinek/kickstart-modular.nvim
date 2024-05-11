@@ -23,3 +23,44 @@ vim.cmd [[
     " nnoremap ]l <cmd>Lnext<CR>
 
     ]]
+
+vim.cmd [[
+
+" replaced text copied into unnamed register
+nmap <leader>P :set opfunc=ReplaceAndKeepUnnamedRegister<CR>g@
+nmap <leader>PP <leader>P_
+function! ReplaceAndKeepUnnamedRegister(type, ...)
+  let sel_save = &selection
+  let &selection = "inclusive"
+  if a:type == 'line'
+    silent exe "normal! '[V']P"
+  elseif a:type == 'char'
+    silent exe "normal! `[v`]P"
+  endif
+  let &selection = sel_save
+endfunction
+
+" unnamed register not changed
+nmap <leader>p :set opfunc=ReplaceAndChangeUnnamedRegister<CR>g@
+nmap <leader>pp <leader>p_
+function! ReplaceAndChangeUnnamedRegister(type, ...)
+  let sel_save = &selection
+  let &selection = "inclusive"
+  if a:type == 'line'
+    silent exe "normal! '[V']p"
+  elseif a:type == 'char'
+    silent exe "normal! `[v`]p"
+  endif
+  let &selection = sel_save
+endfunction
+
+
+" -- next greatest remap ever : asbjornHaland
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nmap <leader>Y "+Y
+
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+]]

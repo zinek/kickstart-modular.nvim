@@ -130,12 +130,11 @@ return {
       vim.fn.jobstart { 'wsl-open', url } -- linux
     end,
 
-    -- see below for full list of options 👇
+    ui = {
+      checkboxes = {
+        [' '] = { char = '󰄱', hl_group = 'ObsidianTodo' },
+        ['x'] = { char = '', hl_group = 'ObsidianDone' },
+      },
+    },
   },
-  -- config = function(_, opts)
-  --   require('obsidian').setup(opts)
-  --   vim.keymap.set('n', '<leader>oc', function()
-  --     require('telescope.builtin').commands { default_text = 'obsidian' }
-  --   end, { desc = 'Obsidian command' })
-  -- end,
 }

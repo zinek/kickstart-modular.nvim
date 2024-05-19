@@ -1,6 +1,9 @@
 return {
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
+    enabled = function()
+      return not vim.g.vscode
+    end,
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       'williamboman/mason.nvim',

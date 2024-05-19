@@ -1,6 +1,9 @@
 return {
   {
     'stevearc/oil.nvim',
+    enabled = function()
+      return not vim.g.vscode
+    end,
     opts = {
       columns = {
         { 'mtime', format = '%Y-%m-%d %T', highlight = 'Error' },
@@ -15,7 +18,7 @@ return {
     -- Optional dependencies
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     init = function()
-        vim.keymap.set('n', '-', '<cmd>Oil<CR>', { desc = 'Open parent directory' })
+      vim.keymap.set('n', '-', '<cmd>Oil<CR>', { desc = 'Open parent directory' })
     end,
   },
 }

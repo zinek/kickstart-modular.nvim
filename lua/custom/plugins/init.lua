@@ -2,4 +2,4 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-return { 'tpope/vim-unimpaired' }
+return { 'tpope/vim-unimpaired', 'tpope/vim-abolish' }

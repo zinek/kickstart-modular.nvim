@@ -1,0 +1,98 @@
+""" Map leader to space ---------------------
+let mapleader=","
+
+set scrolloff=2
+
+set ideajoin
+""" Plugins  --------------------------------
+set surround
+set multiple-cursors
+set commentary
+set argtextobj
+set easymotion
+set textobj-entire
+set ReplaceWithRegister
+
+""" Plugin settings -------------------------
+let g:argtextobj_pairs="[:],(:),<:>"
+
+""" Common settings -------------------------
+set showmode
+set so=5
+set incsearch
+set nu
+set ignorecase
+set smartcase
+
+""" Idea specific settings ------------------
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
+
+""" Mappings --------------------------------
+" map <leader>f <Plug>(easymotion-s)
+" map <leader>e <Plug>(easymotion-f)
+
+map gr <Action>(FindUsages)
+map gd <Action>(GotoDeclaration)
+map <leader>rn <Action>(RenameElement)
+map <leader>sf <Action>(GotoFile)
+
+map <space>dd <Action>(Debug)
+map <space>de <Action>(Stop)
+map <space>dl <Action>(StepInto)
+map <space>dj <Action>(StepOver)
+map <space>dk <Action>(StepOut)
+map <space>db <Action>(ToggleLineBreakpoint)
+
+map <leader>ds <Action>(FileStructurePopup)
+map <leader>zz <Action>(ToggleDistractionFreeMode)
+
+map <leader>nf <Action>(SelectInProjectView)
+
+
+map <leader>ff <Action>(ReformatCode)
+
+map <leader>gb <Action>(Annotate)
+map <leader>h <Action>(Vcs.ShowTabbedFileHistory)
+map [d <Action>(GotoPreviousError)
+map ]d <Action>(GotoNextError)
+
+map [q :action PreviousOccurence<CR>
+map ]q :action NextOccurence<CR>
+
+map [c :action VcsShowPrevChangeMarker<CR>
+map ]c :action VcsShowNextChangeMarker<CR>
+
+map [<space> mPO<ESC>`P
+map ]<space> mPo<ESC>`P
+
+map <leader>rl :source ~/.ideavimrc<CR> :action IdeaVim.ReloadVimRc.reload<CR> :echo ".ideavimrc loaded"<CR>
+" map <leader>rl :source ~/.ideavimrc<CR>
+" map <leader>ee :echo "ee"<CR> :echo "bbcc"<CR>
+
+" workaround for commentary
+" nmap gcc :echo "bbb"<CR> :echo "first"<CR> :echo "aaa"<CR>
+map gc :action CommentByLineComment<CR>
+
+nmap <c-o> <Action>(Back)<CR>
+nmap <c-i> <Action>(Forward)<CR>
+
+
+map [b <Action>(GotoPreviousBookmark)
+map ]b <Action>(GotoNextBookmark)
+nmap <A-S-'> <Action>(ShowBookmarks)<CR>
+nmap <leader>a <Action>(ToggleBookmarkWithMnemonic)
+
+
+map <A-S-A> <Action>(GotoBookmarkA)
+map <A-S-S> <Action>(GotoBookmarkS)
+map <A-S-D> <Action>(GotoBookmarkD)
+map <A-S-F> <Action>(GotoBookmarkF)
+
+nnoremap <leader>w <C-W>
+nmap <A-h> <c-w>h
+nnoremap <A-j> <c-w>j
+nnoremap <A-k> <c-w>k
+nnoremap <A-l> <c-w>l
+" nmap <leader>bdo <Action>(CloseOtherTabs)

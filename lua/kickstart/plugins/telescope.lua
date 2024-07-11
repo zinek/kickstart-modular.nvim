@@ -50,7 +50,7 @@ return {
       -- Telescope picker. This is really useful to discover what Telescope can
       -- do as well as how to actually do it!
 
-      local trouble = require 'trouble.providers.telescope'
+      local trouble = require 'trouble.sources.telescope'
 
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
@@ -71,8 +71,8 @@ return {
         },
         defaults = {
           mappings = {
-            i = { ['<c-t>'] = trouble.open_with_trouble },
-            n = { ['<c-t>'] = trouble.open_with_trouble },
+            i = { ['<c-t>'] = trouble.open },
+            n = { ['<c-t>'] = trouble.open },
           },
         },
       }

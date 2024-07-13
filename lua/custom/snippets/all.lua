@@ -35,7 +35,7 @@ table.insert(snippets, ls.parser.parse_snippet('path', '$TM_FILEPATH'))
 table.insert(
   snippets,
   s('todo', {
-    t 'MZ.TODO ',
+    t 'MZ.TODO: ',
     f(function()
       return os.date '%Y-%m-%d '
     end),
@@ -47,6 +47,14 @@ table.insert(
   snippets,
   s('note', {
     t 'NOTE: ',
+    i(0),
+  })
+)
+
+table.insert(
+  snippets,
+  s('fixme', {
+    t 'FIXME: ',
     i(0),
   })
 )

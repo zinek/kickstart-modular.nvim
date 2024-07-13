@@ -1,3 +1,25 @@
+local function lsp_references(ignoreTests)
+  require('telescope.builtin').lsp_references {
+      file_ignore_patterns = ignoreTests and {
+          "**/*.spec.ts",
+          "**/*Tests.cs",
+          "**/*Test.cs",
+      },
+      fname_width = 40,
+      trim_text = false,
+      sorting_strategy = "ascending",
+      path_display = {
+          "shorten",
+      },
+      layout_strategy = 'vertical',
+      layout_config = {
+          height = 0.95,
+          width = 0.95,
+          preview_height = 0.6,
+          preview_cutoff = 0,
+      },
+  }
+end
 return {
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -70,7 +92,8 @@ return {
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
           -- Find references for the word under your cursor.
-          map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          map('gr', function() lsp_references(false) end, '[G]oto [R]eferences')
+          map('<leader>gr', function() lsp_references(true) end, '[G]oto [R]eferences')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.

@@ -4,7 +4,9 @@ return {
     'folke/todo-comments.nvim',
     event = 'VimEnter',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = { signs = false },
+    opts = { signs = false, keywords = {
+      ACCEPTED = { icon = ' ', color = 'hint' },
+    } },
     init = function()
       vim.keymap.set('n', ']t', function()
         require('todo-comments').jump_next()

@@ -63,4 +63,7 @@ nmap <leader>Y "+Y
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
+nmap gY :let @+=expand('%:p') . ' ' . line('.')<CR>
+nmap gy :let @+=expand('%') . ' ' . line('.')<CR>
+
 ]]

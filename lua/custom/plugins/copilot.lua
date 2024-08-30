@@ -1,5 +1,6 @@
 return {
   'github/copilot.vim',
+  enabled = false,
   init = function()
     vim.keymap.set('i', '<M-CR>', 'copilot#Accept("")', {
       expr = true,

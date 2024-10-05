@@ -27,6 +27,7 @@ return {
   },
   config = function()
     local dap = require 'dap'
+    local widgets = require 'dap.ui.widgets'
     local dapui = require 'dapui'
 
     require('nvim-dap-virtual-text').setup {}
@@ -59,12 +60,23 @@ return {
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Debug: Set Breakpoint' })
+    vim.keymap.set('v', '<M-K>', dapui.eval, { desc = 'Debug: eval' })
+    vim.keymap.set('n', '<M-K>', dapui.eval, { desc = 'Debug: eval' })
+    vim.keymap.set('n', '<F8>', function()
+      dapui.float_element 'watches'
+    end, { desc = 'Debug: open watches window' })
+    vim.keymap.set('n', '<F9>', function()
+      dapui.float_element()
+    end, { desc = 'Debug: open window' })
 
     vim.api.nvim_set_hl(0, 'blue', { fg = '#3d59a1' })
     vim.api.nvim_set_hl(0, 'red', { fg = '#ff0000' })
     vim.api.nvim_set_hl(0, 'green', { fg = '#9ece6a' })
     vim.api.nvim_set_hl(0, 'yellow', { fg = '#FFFF00' })
     vim.api.nvim_set_hl(0, 'orange', { fg = '#f09000' })
+    -- vim.cmd [[
+    --   autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<CR>
+    -- ]]
 
     vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'red', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
     vim.fn.sign_define('DapBreakpointCondition', { text = '󰋗', texthl = 'red', linehl = 'DapBreakpoint', numhl = 'DapBreakpoint' })
@@ -121,15 +133,24 @@ return {
         type = 'coreclr',
         name = 'launch - netcoredbg',
         request = 'launch',
-        program = function()
-          -- return 'aaa'
-          return '/home/marcin/git/zinek/aoc/bin/Debug/net8.0/aoc.dll'
-          -- return vim.fn.input { 'Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file' }
-        end,
-        -- cwd = function()
-        --   -- todo: request input from ui
-        --   return vim.fn.getcwd()
+        -- program = function()
+        --   -- return 'aaa'
+        --   return '/home/marcin/git/zinek/aoc/bin/Debug/net8.0/aoc.dll'
+        --   -- return vim.fn.input { 'Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file' }
         -- end,
+        program = function()
+          -- local path = vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/**/*.dll', 'file')
+          local path = require('dap.utils').pick_file {
+            filter = '.*%.dll',
+            executables = false,
+            path = vim.fn.getcwd() .. '/bin',
+          }
+          return (path and path ~= '') and path or dap.ABORT
+        end,
+        cwd = function()
+          -- todo: request input from ui
+          return vim.fn.getcwd()
+        end,
       },
     }
 

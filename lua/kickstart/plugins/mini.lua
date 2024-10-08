@@ -1,6 +1,7 @@
 return {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
+    enabled = true,
     config = function()
       -- Better Around/Inside textobjects
       --
@@ -16,6 +17,10 @@ return {
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup {
+        custom_surroundings = {
+          -- Make `)` insert parts with spaces. `input` pattern stays the same.
+          ['B'] = { output = { left = '{', right = '}' } },
+        },
         -- mappings from tpope/vim-surround
         mappings = {
           add = 'ys',

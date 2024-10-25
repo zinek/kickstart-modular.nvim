@@ -4,10 +4,11 @@ return {
   cmd = 'ToggleTerm',
   keys = {
 
-    { '<C-\\>', '<cmd>:1ToggleTerm direction=float<CR>', mode = { 'n', 'i', 't' } },
-    { '<M-F1>', '<cmd>:2ToggleTerm direction=horizontal size=20<CR>', mode = { 'n', 't' } },
-    { '<M-F2>', '<cmd>:3ToggleTerm direction=vertical size=100<CR>', mode = { 'n', 't' } },
-    { '<M-F3>', '<cmd>:4ToggleTerm direction=float<CR>', mode = { 'n', 't' } },
+    { '<M-$>', '<cmd>:ToggleTerm<CR>', mode = { 'n', 't' } },
+    { '<M-!>', '<cmd>:1ToggleTerm<CR>', mode = { 'n', 't' } },
+    { '<M-@>', '<cmd>:2ToggleTerm<CR>', mode = { 'n', 't' } },
+    { '<M-#>', '<cmd>:3ToggleTerm<CR>', mode = { 'n', 't' } },
+    { '<M-%>', '<cmd>:TermSelect<CR>', mode = { 'n', 't' } },
     { '<leader>gl', '', mode = { 'n', 't' } },
     { '<leader>gl', function() end, mode = { 'n', 't' } },
   },
@@ -17,7 +18,7 @@ return {
 
       start_in_insert = true,
       terminal_mappings = true,
-      -- direction = 'float',
+      direction = 'float',
       -- shell = "pwsh.exe -NoLogo -NoProfile",
       -- shell = 'pwsh.exe -NoLogo',
       auto_scroll = true,

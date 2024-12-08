@@ -6,10 +6,11 @@ return {
   opts = {
     modes = {
       char = {
-        jump_labels = true,
+        enabled = false,
+        -- jump_labels = true,
       },
       search = {
-        enabled = true,
+        enabled = false,
       },
     },
     label = {

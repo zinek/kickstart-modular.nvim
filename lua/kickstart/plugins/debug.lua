@@ -30,6 +30,21 @@ return {
     local widgets = require 'dap.ui.widgets'
     local dapui = require 'dapui'
 
+    local function is_windows()
+      -- Use os_uname().sysname for checking the OS type
+      local os_name = vim.loop.os_uname().sysname
+      return os_name:match 'Windows_NT' ~= nil
+    end
+
+    local pathSeparator = package.config:sub(1, 1) -- Get the OS-specific path separator
+    local function normalize_path(path)
+      if pathSeparator == '\\' then
+        return path:gsub('/', '\\')
+      else
+        return path
+      end
+    end
+
     require('nvim-dap-virtual-text').setup {}
 
     require('mason-nvim-dap').setup {
@@ -122,7 +137,10 @@ return {
 
     -- local mason_path = vim.fn.glob(vim.fn.stdpath 'data' .. '/mason/')
     local netcoredbg = vim.fn.glob(vim.fn.stdpath 'data' .. '/mason/' .. 'packages/netcoredbg/netcoredbg')
-    -- print('netcoredbg path', netcoredbg)
+    if is_windows() then
+      netcoredbg = vim.fn.glob(vim.fn.stdpath 'data' .. '/mason/' .. 'packages/netcoredbg/netcoredbg/netcoredbg.exe')
+    end
+    print('netcoredbg path', netcoredbg)
     dap.adapters.coreclr = {
       type = 'executable',
       command = netcoredbg,
@@ -143,7 +161,7 @@ return {
           local path = require('dap.utils').pick_file {
             filter = '.*%.dll',
             executables = false,
-            path = vim.fn.getcwd() .. '/bin',
+            path = vim.fn.glob(vim.fn.getcwd() .. '/bin'),
           }
           return (path and path ~= '') and path or dap.ABORT
         end,
